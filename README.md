@@ -5,6 +5,5 @@ Last-Hitting / Wave Management: Controlling minion/creeps waves to freeze them n
 ​Cooldown Tracking: Timing enemy ultimate abilities or summoner spells to engage during vulnerability windows.
 ​Positioning in Teamfights: Staying on the backline as a damage dealer or targeting priority targets as an initiator.
 
+ [📖 PUBG Recoil & Gameplay Guide](PUBG-Guides/recoil-and-gameplay-tips.md)
 
-* [📖 Read PUBG Recoil & Gameplay Guide](./PUBG-Guides/recoil-and-gameplay-tips.md)
-*
