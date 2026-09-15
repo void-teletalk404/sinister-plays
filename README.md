@@ -7,3 +7,7 @@ Last-Hitting / Wave Management: Controlling minion/creeps waves to freeze them n
 
  [📖 PUBG Recoil & Gameplay Guide](PUBG-Guides/recoil-and-gameplay-tips.md)
 
+## 🔗 Official Brand Links
+* 🌐 **Website:** https://sinisterplays.com
+* 🔴 **YouTube Channel:** https://m.youtube.com/@sinisterplaysyt
+*
