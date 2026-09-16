@@ -131,36 +131,6 @@
       margin-top: 30px;
     }
 
-    /* Bottom-Right QR Widget */
-    .qr-corner-widget {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ffffff;
-      border: 2px solid #ff4655;
-      padding: 8px;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-      z-index: 9999;
-    }
-
-    .qr-corner-widget img {
-      width: 85px;
-      height: 85px;
-      display: block;
-      border-radius: 4px;
-      margin: 0 auto 5px;
-    }
-
-    .qr-corner-widget span {
-      font-size: 8px;
-      color: #0f172a;
-      font-weight: bold;
-      display: block;
-      letter-spacing: 0.5px;
-    }
-
     @media(max-width:768px) {
       table td {
         display: block;
@@ -170,17 +140,6 @@
       .label {
         background: #003366;
         color: #fff;
-      }
-
-      .qr-corner-widget {
-        bottom: 10px;
-        right: 10px;
-        padding: 6px;
-      }
-
-      .qr-corner-widget img {
-        width: 65px;
-        height: 65px;
       }
     }
   </style>
@@ -244,7 +203,7 @@
       </tr>
       <tr>
         <td class="label">Verification Date</td>
-        <td>28 July 2026</td>
+        <td>10 November 2021</td>
       </tr>
     </table>
     
@@ -256,22 +215,17 @@
     
     <div class="documents">
       <h2>Documents</h2>
-      <!-- ২ পেজের PDF টি নতুন ট্যাবে ওপেন করে পুরোটা দেখাবে -->
-      <a href="certificate-hd.pdf" target="_blank" class="btn view">
-        📄 View Certificate
-      </a>
       
-      <!-- ২ পেজের PDF টি একবারে ডাউনলোডে বসাবে -->
-      <a href="certificate-hd.pdf" download="certificate-hd.pdf" class="btn download">
+      <!-- Opens single tab viewer showing page1.jpg & page2.jpg vertically stacked -->
+      <button onclick="viewBothInOneTab()" class="btn view">
+        📄 View Certificate
+      </button>
+      
+      <!-- Instant sequential download for both images -->
+      <button onclick="downloadImages()" class="btn download">
         ⬇ Download Certificate
-      </a>
+      </button>
     </div>
-  </div>
-
-  <!-- QR Widget -->
-  <div class="qr-corner-widget">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://qr1.me-qr.com/data/image-pack/dwbzecep" alt="Sinister Plays Trademark QR">
-    <span>TRADEMARK VERIFIED</span>
   </div>
   
   <footer>
@@ -279,5 +233,59 @@
     All Rights Reserved.
   </footer>
 
+  <script>
+    const images = ['page1.jpg', 'page2.jpg'];
+
+    // Opens a single tab with Image 1 on top and Image 2 directly below it
+    function viewBothInOneTab() {
+      const viewerWindow = window.open('', '_blank');
+      viewerWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>View Certificate - Sinister Plays</title>
+          <style>
+            body {
+              background-color: #1a1a1a;
+              margin: 0;
+              padding: 30px 0;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 25px;
+            }
+            img {
+              max-width: 90%;
+              width: 850px;
+              height: auto;
+              box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+              border-radius: 6px;
+              background: #fff;
+            }
+          </style>
+        </head>
+        <body>
+          <img src="page1.jpg" alt="Certificate Page 1">
+          <img src="page2.jpg" alt="Certificate Page 2">
+        </body>
+        </html>
+      `);
+      viewerWindow.document.close();
+    }
+
+    // Downloads both images sequentially
+    function downloadImages() {
+      images.forEach((img, index) => {
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = img;
+          a.download = img;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, index * 300);
+      });
+    }
+  </script>
 </body>
 </html>
