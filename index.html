@@ -105,6 +105,9 @@
       border-radius: 8px;
       font-weight: bold;
       transition: .3s;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
     }
     
     .view {
@@ -128,36 +131,39 @@
       margin-top: 30px;
     }
 
-    /* Reliable Trademark QR Widget */
-    .qr-corner-widget {
+    /* Modal Popup Box for Viewing Image (Hidden by Default) */
+    .certificate-modal {
+      display: none;
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ffffff;
-      border: 2px solid #ff4655;
-      padding: 8px;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 100000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .certificate-modal img {
+      max-width: 90%;
+      max-height: 90vh;
       border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-      z-index: 9999;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
     }
 
-    .qr-corner-widget img {
-      width: 85px;
-      height: 85px;
-      display: block;
-      border-radius: 4px;
-      margin: 0 auto 5px;
-    }
-
-    .qr-corner-widget span {
-      font-size: 8px;
-      color: #0f172a;
+    .close-modal-btn {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #ffffff;
+      font-size: 40px;
       font-weight: bold;
-      display: block;
-      letter-spacing: 0.5px;
+      cursor: pointer;
+      user-select: none;
     }
-    
+
     @media(max-width:768px) {
       table td {
         display: block;
@@ -167,17 +173,6 @@
       .label {
         background: #003366;
         color: #fff;
-      }
-
-      .qr-corner-widget {
-        bottom: 10px;
-        right: 10px;
-        padding: 6px;
-      }
-
-      .qr-corner-widget img {
-        width: 65px;
-        height: 65px;
       }
     }
   </style>
@@ -197,7 +192,7 @@
     <table>
       <tr>
         <td class="label">Verification Status</td>
-        <td class="status">✔ VERIFIED & ACTIVE</td>
+        <td class="status">✔ VERIFIED &amp; ACTIVE</td>
       </tr>
       <tr>
         <td class="label">Certificate Type</td>
@@ -241,37 +236,48 @@
       </tr>
       <tr>
         <td class="label">Verification Date</td>
-        <td>10 November 2021</td>
+        <td>28 July 2026</td>
       </tr>
     </table>
     
     <div class="notice">
       <b>Official Verification Notice</b>
       <br><br>
-      This certificate has been successfully verified through the certificate verification database. The registration information is valid and currently active. Any unauthorized reproduction, alteration, misuse, or fraudulent use of this certificate may result in legal action under applicable intellectual property laws.
+      The information displayed above has been taken from the provided Certificate of Registration of Trademark for Sinister Plays. The certificate identifies Trademark No. 794210 and Serial No. 561024, registered in Class 41 for A Bangladeshi Esports and Gaming Creation Organisation.
     </div>
     
     <div class="documents">
       <h2>Documents</h2>
-      <a href="1000021456.jpg." target="_blank" class="btn view">
+      <button class="btn view" onclick="showCertificate()">
         📄 View Certificate
-      </a>
-      <a href="1000021456.jpg." download class="btn download">
+      </button>
+      
+      <a href="certificate-hd.jpg" download="certificate-hd.jpg" class="btn download">
         ⬇ Download Certificate
       </a>
     </div>
   </div>
 
-  <!-- 🔻 RELIABLE TRADEMARK QR CODE 🔻 -->
-  <div class="qr-corner-widget">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://qr1.me-qr.com/data/image-pack/dwbzecep" alt="Sinister Plays Trademark QR">
-    <span>TRADEMARK VERIFIED</span>
+  <!-- Hidden Modal Popup for Image -->
+  <div id="certModal" class="certificate-modal">
+    <span class="close-modal-btn" onclick="hideCertificate()">&times;</span>
+    <img src="certificate-hd.jpg" alt="Official Trademark Certificate">
   </div>
   
   <footer>
     © 2026 Official Certificate Verification Database<br>
     All Rights Reserved.
   </footer>
+
+  <script>
+    function showCertificate() {
+      document.getElementById("certModal").style.display = "flex";
+    }
+
+    function hideCertificate() {
+      document.getElementById("certModal").style.display = "none";
+    }
+  </script>
   
 </body>
 </html>
