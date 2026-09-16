@@ -1,103 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinister Plays | Official Brand Hub</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d1117; color: #c9d1d9; display: flex; flex-direction: column; min-height: 100vh; align-items: center; }
-        header { width: 100%; max-width: 800px; padding: 40px 20px 20px; text-align: center; }
-        h1 { color: #f0f6fc; font-size: 2.5rem; margin-bottom: 10px; }
-        p.subtitle { color: #8b949e; font-size: 1.1rem; }
-        .badge { display: inline-block; background: #238636; color: #fff; font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; margin-top: 10px; font-weight: bold; }
-        main { width: 100%; max-width: 800px; padding: 20px; flex: 1; }
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 24px; margin-bottom: 20px; }
-        .card h2 { color: #58a6ff; font-size: 1.4rem; margin-bottom: 12px; }
-        .card p { line-height: 1.6; color: #8b949e; margin-bottom: 15px; }
-        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-        .btn { display: block; text-align: center; padding: 12px; background: #21262d; color: #58a6ff; border: 1px solid #30363d; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.2s ease; }
-        .btn:hover { background: #30363d; border-color: #8b949e; }
-        footer { width: 100%; max-width: 800px; padding: 30px 20px; border-top: 1px solid #30363d; text-align: center; font-size: 0.85rem; color: #8b949e; }
-        footer a { color: #58a6ff; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Certificate Verification Database</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: #eef3f9;
+      position: relative;
+    }
+    
+    header {
+      background: #003366;
+      color: #fff;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, .2);
+    }
+    
+    header h1 {
+      font-size: 30px;
+    }
+    
+    header p {
+      margin-top: 8px;
+      opacity: .9;
+    }
+    
+    .container {
+      max-width: 1050px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, .12);
+      overflow: hidden;
+    }
+    
+    .title {
+      background: #f8f9fa;
+      padding: 20px;
+      border-bottom: 4px solid #003366;
+      text-align: center;
+    }
+    
+    .title h2 {
+      color: #003366;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    td {
+      padding: 16px;
+      border: 1px solid #ddd;
+    }
+    
+    .label {
+      width: 280px;
+      font-weight: bold;
+      background: #f5f5f5;
+    }
+    
+    .status {
+      color: #0a8c38;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    .notice {
+      margin: 30px;
+      padding: 20px;
+      background: #f1fff3;
+      border-left: 6px solid #28a745;
+      line-height: 1.8;
+    }
+    
+    .documents {
+      padding: 30px;
+      text-align: center;
+      background: #fafafa;
+    }
+    
+    .documents h2 {
+      margin-bottom: 20px;
+      color: #003366;
+    }
+    
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 35px;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: .3s;
+    }
+    
+    .view {
+      background: #003366;
+    }
+    
+    .download {
+      background: #28a745;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      opacity: .9;
+    }
+    
+    footer {
+      background: #003366;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    /* Reliable Trademark QR Widget */
+    .qr-corner-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #ff4655;
+      padding: 8px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      z-index: 9999;
+    }
+
+    .qr-corner-widget img {
+      width: 85px;
+      height: 85px;
+      display: block;
+      border-radius: 4px;
+      margin: 0 auto 5px;
+    }
+
+    .qr-corner-widget span {
+      font-size: 8px;
+      color: #0f172a;
+      font-weight: bold;
+      display: block;
+      letter-spacing: 0.5px;
+    }
+    
+    @media(max-width:768px) {
+      table td {
+        display: block;
+        width: 100%;
+      }
+      
+      .label {
+        background: #003366;
+        color: #fff;
+      }
+
+      .qr-corner-widget {
+        bottom: 10px;
+        right: 10px;
+        padding: 6px;
+      }
+
+      .qr-corner-widget img {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <header>
-        <h1>Sinister Plays</h1>
-        <p class="subtitle">Official Tactical Esports Hub & Content Headquarters</p>
-        <span class="badge">Verified Brand Entity</span>
-    </header>
-
-    <main>
-        <section class="card">
-            <h2>About The Brand</h2>
-            <p>Welcome to the official digital hub for <strong>Sinister Plays</strong>. Managed by MD Shakil (Competitive PUBG Mobile Athlete & Streamer), this platform hosts official guides, tactical analysis, and verified community announcements.</p>
-        </section>
-
-        <section class="card">
-            <h2>Official Channels</h2>
-            <div class="links-grid">
-                <a href="https://www.youtube.com/@sinisterplaysyt" target="_blank" class="btn">🔴 YouTube Channel</a>
-                <a href="https://github.com/void-teletalk404/sinister-plays" target="_blank" class="btn">💻 Official GitHub Hub</a>
-                <a href="./PUBG-Guides/recoil-and-gameplay-tips.md" class="btn">📖 PUBG Gameplay Guides</a>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>Intellectual Property & Legal Notice</h2>
-            <p>All content, branding, media assets, and guides published under the "Sinister Plays" identifier are protected intellectual property. Unauthorized commercial use, impersonation, or financial solicitation on unverified third-party platforms is strictly prohibited and subject to DMCA enforcement.</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Sinister Plays. All rights reserved.</p>
-        <p>Official IP Enforcement & Verification Hub</p>
-    </footer>
-<!-- Floating Bottom-Right Trademark Badge with Direct QR Code -->
-<div id="tm-widget" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 10px;
-    padding: 12px 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    z-index: 9999;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #c9d1d9;
-    max-width: 220px;
-    text-align: center;
-">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-        <span style="background-color: #238636; color: #fff; font-size: 0.7rem; font-weight: bold; padding: 2px 8px; border-radius: 10px;">
-            &#10004; VERIFIED IP
-        </span>
-        <span style="font-size: 0.75rem; color: #8b949e;">Sinister Plays™</span>
+  
+  <header>
+    <h1>Official Certificate Verification Database</h1>
+    <p>Trademark Registration Verification Portal</p>
+  </header>
+  
+  <div class="container">
+    <div class="title">
+      <h2>Certificate Verification Result</h2>
     </div>
     
-    <div style="font-size: 0.75rem; color: #8b949e; margin-bottom: 4px;">TRADEMARK KEYWORD ID:</div>
-    <div style="
-        font-family: monospace;
-        font-size: 0.8rem;
-        color: #58a6ff;
-        background-color: #0d1117;
-        padding: 4px 6px;
-        border-radius: 6px;
-        border: 1px dashed #30363d;
-        word-break: break-all;
-        font-weight: bold;
-        margin-bottom: 8px;
-    ">
-        SINISTER-PLAYS-TRADEMARK-794210
+    <table>
+      <tr>
+        <td class="label">Verification Status</td>
+        <td class="status">✔ VERIFIED & ACTIVE</td>
+      </tr>
+      <tr>
+        <td class="label">Certificate Type</td>
+        <td>Trademark Registration Certificate</td>
+      </tr>
+      <tr>
+        <td class="label">Brand Name</td>
+        <td>Sinister Plays</td>
+      </tr>
+      <tr>
+        <td class="label">Trademark Number</td>
+        <td>794210</td>
+      </tr>
+      <tr>
+        <td class="label">Serial Number</td>
+        <td>561024</td>
+      </tr>
+      <tr>
+        <td class="label">Registration Date</td>
+        <td>10 November 2021</td>
+      </tr>
+      <tr>
+        <td class="label">Class</td>
+        <td>41</td>
+      </tr>
+      <tr>
+        <td class="label">Class 41 Description</td>
+        <td>Esports events, gaming video creation, entertainment services, digital streaming, and online gaming content publishing</td>
+      </tr>
+      <tr>
+        <td class="label">Registered Owner</td>
+        <td>Jayed Sabit</td>
+      </tr>
+      <tr>
+        <td class="label">Issued By</td>
+        <td>Department of Patents, Designs &amp; Trade Marks</td>
+      </tr>
+      <tr>
+        <td class="label">Database ID</td>
+        <td>TM-BD-794210</td>
+      </tr>
+      <tr>
+        <td class="label">Verification Date</td>
+        <td>10 November 2021</td>
+      </tr>
+    </table>
+    
+    <div class="notice">
+      <b>Official Verification Notice</b>
+      <br><br>
+      This certificate has been successfully verified through the certificate verification database. The registration information is valid and currently active. Any unauthorized reproduction, alteration, misuse, or fraudulent use of this certificate may result in legal action under applicable intellectual property laws.
     </div>
+    
+    <div class="documents">
+      <h2>Documents</h2>
+      <a href="1000021456.jpg" target="_blank" class="btn view">
+        📄 View Certificate
+      </a>
+      <a href="1000021456.jpg" download class="btn download">
+        ⬇ Download Certificate
+      </a>
+    </div>
+  </div>
 
-    <!-- Direct QR Code Image -->
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://void-teletalk404.github.io/sinister-plays/" 
-         alt="Trademark QR Code" 
-         style="width: 140px; height: 140px; border-radius: 6px; background-color: #fff; padding: 6px; margin-top: 4px;">
-</div>
+  <!-- 🔻 RELIABLE TRADEMARK QR CODE 🔻 -->
+  <div class="qr-corner-widget">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://qr1.me-qr.com/data/image-pack/dwbzecep" alt="Sinister Plays Trademark QR">
+    <span>TRADEMARK VERIFIED</span>
+  </div>
+  
+  <footer>
+    © 2026 Official Certificate Verification Database<br>
+    All Rights Reserved.
+  </footer>
+  
 </body>
 </html>
