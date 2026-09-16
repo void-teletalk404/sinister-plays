@@ -131,37 +131,34 @@
       margin-top: 30px;
     }
 
-    /* Modal Popup Box for Viewing Image (Hidden by Default) */
-    .certificate-modal {
-      display: none;
+    /* Bottom-Right QR Widget */
+    .qr-corner-widget {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 100000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .certificate-modal img {
-      max-width: 90%;
-      max-height: 90vh;
+      bottom: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #ff4655;
+      padding: 8px;
       border-radius: 8px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      z-index: 9999;
     }
 
-    .close-modal-btn {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #ffffff;
-      font-size: 40px;
+    .qr-corner-widget img {
+      width: 85px;
+      height: 85px;
+      display: block;
+      border-radius: 4px;
+      margin: 0 auto 5px;
+    }
+
+    .qr-corner-widget span {
+      font-size: 8px;
+      color: #0f172a;
       font-weight: bold;
-      cursor: pointer;
-      user-select: none;
+      display: block;
+      letter-spacing: 0.5px;
     }
 
     @media(max-width:768px) {
@@ -173,6 +170,17 @@
       .label {
         background: #003366;
         color: #fff;
+      }
+
+      .qr-corner-widget {
+        bottom: 10px;
+        right: 10px;
+        padding: 6px;
+      }
+
+      .qr-corner-widget img {
+        width: 65px;
+        height: 65px;
       }
     }
   </style>
@@ -248,20 +256,22 @@
     
     <div class="documents">
       <h2>Documents</h2>
-      <button class="btn view" onclick="showCertificate()">
+      <!-- ২ পেজের PDF টি নতুন ট্যাবে ওপেন করে পুরোটা দেখাবে -->
+      <a href="certificate-hd.pdf" target="_blank" class="btn view">
         📄 View Certificate
-      </button>
+      </a>
       
-      <a href="certificate-hd.jpg" download="certificate-hd.jpg" class="btn download">
+      <!-- ২ পেজের PDF টি একবারে ডাউনলোডে বসাবে -->
+      <a href="certificate-hd.pdf" download="certificate-hd.pdf" class="btn download">
         ⬇ Download Certificate
       </a>
     </div>
   </div>
 
-  <!-- Hidden Modal Popup for Image -->
-  <div id="certModal" class="certificate-modal">
-    <span class="close-modal-btn" onclick="hideCertificate()">&times;</span>
-    <img src="certificate-hd.jpg" alt="Official Trademark Certificate">
+  <!-- QR Widget -->
+  <div class="qr-corner-widget">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://qr1.me-qr.com/data/image-pack/dwbzecep" alt="Sinister Plays Trademark QR">
+    <span>TRADEMARK VERIFIED</span>
   </div>
   
   <footer>
@@ -269,15 +279,5 @@
     All Rights Reserved.
   </footer>
 
-  <script>
-    function showCertificate() {
-      document.getElementById("certModal").style.display = "flex";
-    }
-
-    function hideCertificate() {
-      document.getElementById("certModal").style.display = "none";
-    }
-  </script>
-  
 </body>
 </html>
