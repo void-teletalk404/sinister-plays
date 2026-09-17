@@ -254,7 +254,7 @@
       </tr>
       <tr>
         <td class="label">Verification Date</td>
-        <td>12/02/2024</td>
+        <td>28 11 25</td>
       </tr>
     </table>
     
@@ -272,10 +272,10 @@
         📄 View Certificate
       </button>
       
-      <!-- Download single certificate image -->
-      <a href="certificate.jpg" download="certificate.jpeg" class="btn download">
+      <!-- Safe direct download via JavaScript blob -->
+      <button onclick="downloadCertificateImage()" class="btn download">
         ⬇ Download Certificate
-      </a>
+      </button>
     </div>
   </div>
 
@@ -283,7 +283,7 @@
   <div id="certOverlay" class="overlay">
     <button onclick="toggleViewer(false)" class="close-btn">✖ Close</button>
     <div class="overlay-content">
-      <img src="certificate.jpeg" alt="Certificate Image">
+      <img src="certificate.jpg" alt="Certificate Image">
     </div>
   </div>
   
@@ -297,6 +297,32 @@
       const overlay = document.getElementById('certOverlay');
       overlay.style.display = show ? 'block' : 'none';
       document.body.style.overflow = show ? 'hidden' : 'auto';
+    }
+
+    async function downloadCertificateImage() {
+      const imageSrc = 'certificate.jpg';
+      try {
+        const response = await fetch(imageSrc);
+        if (!response.ok) throw new Error('Network response failed');
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'certificate.jpg';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      } catch (e) {
+        // Fallback for direct link download if fetch is blocked locally
+        const a = document.createElement('a');
+        a.href = imageSrc;
+        a.download = 'certificate.jpg';
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
     }
   </script>
 </body>
