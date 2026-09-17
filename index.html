@@ -122,6 +122,57 @@
       transform: translateY(-3px);
       opacity: .9;
     }
+
+    /* Fullscreen Overlay Viewer */
+    .cert-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      z-index: 99999;
+      overflow-y: auto;
+      padding: 50px 15px;
+    }
+
+    .cert-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .cert-wrapper img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      background: #fff;
+    }
+
+    .close-overlay-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      background: #ff4655;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      z-index: 100000;
+    }
+
+    .close-overlay-btn:hover {
+      background: #e03e4d;
+    }
     
     footer {
       background: #003366;
@@ -216,15 +267,24 @@
     <div class="documents">
       <h2>Documents</h2>
       
-      <!-- Opens view.html directly in a new tab -->
-      <a href="view.html" target="_blank" class="btn view">
+      <!-- Opens full-screen view -->
+      <button onclick="toggleViewer(true)" class="btn view">
         📄 View Certificate
-      </a>
+      </button>
       
-      <!-- Downloads both page1.jpg and page2.jpg -->
+      <!-- Instant Download -->
       <button onclick="downloadImages()" class="btn download">
         ⬇ Download Certificate
       </button>
+    </div>
+  </div>
+
+  <!-- In-page Document Viewer -->
+  <div id="viewerOverlay" class="cert-overlay">
+    <button onclick="toggleViewer(false)" class="close-overlay-btn">✖ Close Viewer</button>
+    <div class="cert-wrapper">
+      <img src="./page1.jpg" alt="Certificate Page 1">
+      <img src="./page2.jpg" alt="Certificate Page 2">
     </div>
   </div>
   
@@ -234,14 +294,20 @@
   </footer>
 
   <script>
-    const images = ['page1.jpg', 'page2.jpg'];
+    const images = ['./page1.jpg', './page2.jpg'];
+
+    function toggleViewer(show) {
+      const overlay = document.getElementById('viewerOverlay');
+      overlay.style.display = show ? 'block' : 'none';
+      document.body.style.overflow = show ? 'hidden' : 'auto';
+    }
 
     function downloadImages() {
       images.forEach((img, index) => {
         setTimeout(() => {
           const a = document.createElement('a');
           a.href = img;
-          a.download = img;
+          a.download = img.replace('./', '');
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
