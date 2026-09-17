@@ -149,6 +149,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 25px;
       max-width: 900px;
       margin: 0 auto;
     }
@@ -216,8 +217,8 @@
         <td>Certificate of Registration of Trademark [Rule 30(1)]</td>
       </tr>
       <tr>
-        <td class="label">Brand Name / Word</td>
-        <td>Shonali</td>
+        <td class="label">Brand Name</td>
+        <td>shonali</td>
       </tr>
       <tr>
         <td class="label">Trademark Number</td>
@@ -229,7 +230,7 @@
       </tr>
       <tr>
         <td class="label">Registration Date</td>
-        <td>12 February 2024</td>
+        <td>12/02/2024</td>
       </tr>
       <tr>
         <td class="label">Class</td>
@@ -241,11 +242,7 @@
       </tr>
       <tr>
         <td class="label">Registered Owner</td>
-        <td>Jayed Sabit/Sonali</td>
-      </tr>
-      <tr>
-        <td class="label">Owner Address</td>
-        <td>Proprietor, SONALI, Ramna, Dhaka, Bangladesh, 1000</td>
+        <td>kamrul alam/shonali</td>
       </tr>
       <tr>
         <td class="label">Issued By</td>
@@ -257,14 +254,14 @@
       </tr>
       <tr>
         <td class="label">Verification Date</td>
-        <td>29 November 2025</td>
+        <td>12/02/2024</td>
       </tr>
     </table>
     
     <div class="notice">
       <b>Official Verification Notice</b>
       <br><br>
-      The information displayed above has been taken from the provided Certificate of Registration of Trademark for Shonali. The certificate identifies Trademark No. 892145 and Serial No. 777980, registered in Class 41 for A premier Bangladeshi Digital Content Creator and Media Platform.
+      The information displayed above has been taken from the provided Certificate of Registration of Trademark for shonali. The certificate identifies Trademark No. 892145 and Serial No. 777980, registered in Class 41 for A premier Bangladeshi Digital Content Creator and Media Platform, specializing in social media entertainment and digital video production.
     </div>
     
     <div class="documents">
@@ -275,10 +272,10 @@
         📄 View Certificate
       </button>
       
-      <!-- Single image download -->
-      <button onclick="downloadImage()" class="btn download">
+      <!-- Download single certificate image -->
+      <a href="certificate.jpg" download="certificate.jpeg" class="btn download">
         ⬇ Download Certificate
-      </button>
+      </a>
     </div>
   </div>
 
@@ -286,7 +283,7 @@
   <div id="certOverlay" class="overlay">
     <button onclick="toggleViewer(false)" class="close-btn">✖ Close</button>
     <div class="overlay-content">
-      <img src="certificate.jpeg" alt="Trademark Certificate">
+      <img src="certificate.jpeg" alt="Certificate Image">
     </div>
   </div>
   
@@ -296,21 +293,10 @@
   </footer>
 
   <script>
-    const certificateImage = 'certificate.jpeg';
-
     function toggleViewer(show) {
       const overlay = document.getElementById('certOverlay');
       overlay.style.display = show ? 'block' : 'none';
       document.body.style.overflow = show ? 'hidden' : 'auto';
-    }
-
-    function downloadImage() {
-      const a = document.createElement('a');
-      a.href = certificateImage;
-      a.download = certificateImage;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
     }
   </script>
 </body>
