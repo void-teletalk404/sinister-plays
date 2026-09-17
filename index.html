@@ -95,24 +95,6 @@
       margin-bottom: 20px;
       color: #003366;
     }
-
-    .upload-box {
-      margin-bottom: 20px;
-    }
-
-    .upload-btn {
-      padding: 10px 20px;
-      background: #6c757d;
-      color: #fff;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-block;
-      font-weight: bold;
-    }
-
-    #fileInput {
-      display: none;
-    }
     
     .btn {
       display: inline-block;
@@ -236,7 +218,7 @@
       </tr>
       <tr>
         <td class="label">Brand Name</td>
-        <td>shonali</td>
+        <td>Shonali</td>
       </tr>
       <tr>
         <td class="label">Trademark Number</td>
@@ -272,7 +254,7 @@
       </tr>
       <tr>
         <td class="label">Verification Date</td>
-        <td>28 11 25</td>
+        <td>28/11/25</td>
       </tr>
     </table>
     
@@ -284,22 +266,16 @@
     
     <div class="documents">
       <h2>Documents</h2>
-
-      <!-- File Upload Control -->
-      <div class="upload-box">
-        <label for="fileInput" class="upload-btn">📁 Select/Upload Certificate Image</label>
-        <input type="file" id="fileInput" accept="image/*" onchange="handleImageUpload(event)">
-      </div>
       
       <!-- Opens full-screen view modal -->
       <button onclick="toggleViewer(true)" class="btn view">
         📄 View Certificate
       </button>
       
-      <!-- Guaranteed download link -->
-      <a id="downloadBtn" href="certificate.jpg" download="certificate.jpg" class="btn download">
+      <!-- Instant Download for View Certificate Image -->
+      <button onclick="downloadActiveImage()" class="btn download">
         ⬇ Download Certificate
-      </a>
+      </button>
     </div>
   </div>
 
@@ -307,7 +283,7 @@
   <div id="certOverlay" class="overlay">
     <button onclick="toggleViewer(false)" class="close-btn">✖ Close</button>
     <div class="overlay-content">
-      <img id="certImg" src="certificate.jpg" alt="Certificate Image">
+      <img id="certImg" src="certificate.jpeg" alt="Certificate Image">
     </div>
   </div>
   
@@ -317,28 +293,51 @@
   </footer>
 
   <script>
-    let activeImageSource = 'certificate.jpg';
-
     function toggleViewer(show) {
       const overlay = document.getElementById('certOverlay');
       overlay.style.display = show ? 'block' : 'none';
       document.body.style.overflow = show ? 'hidden' : 'auto';
     }
 
-    function handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          activeImageSource = e.target.result;
-          document.getElementById('certImg').src = activeImageSource;
-          
-          const downloadBtn = document.getElementById('downloadBtn');
-          downloadBtn.href = activeImageSource;
-          downloadBtn.download = file.name;
-        };
-        reader.readAsDataURL(file);
-      }
+    function downloadActiveImage() {
+      const certImage = document.getElementById('certImg');
+      const imgSrc = certImage.getAttribute('src');
+      
+      // Draw image onto a canvas to bypass browser "File Not Available" / CORS block
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = imgSrc;
+
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        canvas.toBlob(function(blob) {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'certificate.jpeg';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }, 'image/jpeg');
+      };
+
+      // Direct fallback if canvas fails
+      img.onerror = function() {
+        const link = document.createElement('a');
+        link.href = imgSrc;
+        link.download = 'certificate.jpeg';
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
     }
   </script>
 </body>
