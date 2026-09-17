@@ -122,57 +122,6 @@
       transform: translateY(-3px);
       opacity: .9;
     }
-
-    /* Modal Viewer Overlay */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 99999;
-      overflow-y: auto;
-      padding: 40px 10px;
-    }
-
-    .modal-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 25px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .modal-content img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.8);
-      background: #fff;
-    }
-
-    .close-btn {
-      position: fixed;
-      top: 20px;
-      right: 25px;
-      background: #ff4655;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      z-index: 100000;
-    }
-
-    .close-btn:hover {
-      background: #e03e4d;
-    }
     
     footer {
       background: #003366;
@@ -267,24 +216,15 @@
     <div class="documents">
       <h2>Documents</h2>
       
-      <!-- Triggers Overlay Modal -->
-      <button onclick="openViewer()" class="btn view">
+      <!-- Opens view.html directly in a new tab -->
+      <a href="view.html" target="_blank" class="btn view">
         📄 View Certificate
-      </button>
+      </a>
       
-      <!-- Direct Download -->
+      <!-- Downloads both page1.jpg and page2.jpg -->
       <button onclick="downloadImages()" class="btn download">
         ⬇ Download Certificate
       </button>
-    </div>
-  </div>
-
-  <!-- Certificate Modal Viewer -->
-  <div id="certModal" class="modal-overlay">
-    <button onclick="closeViewer()" class="close-btn">✖ Close Viewer</button>
-    <div class="modal-content">
-      <img src="page1.jpg" alt="Certificate Page 1">
-      <img src="page2.jpg" alt="Certificate Page 2">
     </div>
   </div>
   
@@ -295,16 +235,6 @@
 
   <script>
     const images = ['page1.jpg', 'page2.jpg'];
-
-    function openViewer() {
-      document.getElementById('certModal').style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Stop background scrolling
-    }
-
-    function closeViewer() {
-      document.getElementById('certModal').style.display = 'none';
-      document.body.style.overflow = 'auto'; // Restore background scrolling
-    }
 
     function downloadImages() {
       images.forEach((img, index) => {
