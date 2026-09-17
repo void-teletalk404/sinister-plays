@@ -131,6 +131,57 @@
       margin-top: 30px;
     }
 
+    /* Lightbox Overlay Styles */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      z-index: 99999;
+      overflow-y: auto;
+      padding: 60px 15px 40px;
+    }
+
+    .overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .overlay-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      background: #fff;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      background: #d9534f;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 100000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .close-btn:hover {
+      background: #c9302c;
+    }
+
     @media(max-width:768px) {
       table td {
         display: block;
@@ -216,8 +267,8 @@
     <div class="documents">
       <h2>Documents</h2>
       
-      <!-- Opens both pages stacked vertically in a single new tab -->
-      <button onclick="viewCertificateInNewTab()" class="btn view">
+      <!-- Opens full-screen view modal -->
+      <button onclick="toggleViewer(true)" class="btn view">
         📄 View Certificate
       </button>
       
@@ -225,6 +276,15 @@
       <button onclick="downloadImages()" class="btn download">
         ⬇ Download Certificate
       </button>
+    </div>
+  </div>
+
+  <!-- Fullscreen Certificate Viewer Overlay -->
+  <div id="certOverlay" class="overlay">
+    <button onclick="toggleViewer(false)" class="close-btn">✖ Close</button>
+    <div class="overlay-content">
+      <img src="page1.jpg" alt="Certificate Page 1">
+      <img src="page2.jpg" alt="Certificate Page 2">
     </div>
   </div>
   
@@ -236,61 +296,10 @@
   <script>
     const images = ['page1.jpg', 'page2.jpg'];
 
-    function viewCertificateInNewTab() {
-      // Constructs absolute URLs to ensure relative paths resolve on Netlify/GitHub Pages
-      const img1Path = new URL(images[0], window.location.href).href;
-      const img2Path = new URL(images[1], window.location.href).href;
-
-      const viewerWindow = window.open('', '_blank');
-      
-      viewerWindow.document.write(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>View Certificate - Sinister Plays</title>
-          <style>
-            * {
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box;
-            }
-            body {
-              background-color: #0f172a;
-              padding: 40px 15px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 30px;
-              min-height: 100vh;
-            }
-            .img-container {
-              max-width: 900px;
-              width: 100%;
-            }
-            img {
-              width: 100%;
-              height: auto;
-              display: block;
-              border-radius: 8px;
-              box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-              background: #ffffff;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="img-container">
-            <img src="${img1Path}" alt="Certificate Page 1">
-          </div>
-          <div class="img-container">
-            <img src="${img2Path}" alt="Certificate Page 2">
-          </div>
-        </body>
-        </html>
-      `);
-      
-      viewerWindow.document.close();
+    function toggleViewer(show) {
+      const overlay = document.getElementById('certOverlay');
+      overlay.style.display = show ? 'block' : 'none';
+      document.body.style.overflow = show ? 'hidden' : 'auto';
     }
 
     function downloadImages() {
