@@ -95,6 +95,24 @@
       margin-bottom: 20px;
       color: #003366;
     }
+
+    .upload-box {
+      margin-bottom: 20px;
+    }
+
+    .upload-btn {
+      padding: 10px 20px;
+      background: #6c757d;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    #fileInput {
+      display: none;
+    }
     
     .btn {
       display: inline-block;
@@ -266,16 +284,22 @@
     
     <div class="documents">
       <h2>Documents</h2>
+
+      <!-- File Upload Control -->
+      <div class="upload-box">
+        <label for="fileInput" class="upload-btn">📁 Select/Upload Certificate Image</label>
+        <input type="file" id="fileInput" accept="image/*" onchange="handleImageUpload(event)">
+      </div>
       
       <!-- Opens full-screen view modal -->
       <button onclick="toggleViewer(true)" class="btn view">
         📄 View Certificate
       </button>
       
-      <!-- Safe direct download via JavaScript blob -->
-      <button onclick="downloadCertificateImage()" class="btn download">
+      <!-- Guaranteed download link -->
+      <a id="downloadBtn" href="certificate.jpg" download="certificate.jpg" class="btn download">
         ⬇ Download Certificate
-      </button>
+      </a>
     </div>
   </div>
 
@@ -283,7 +307,7 @@
   <div id="certOverlay" class="overlay">
     <button onclick="toggleViewer(false)" class="close-btn">✖ Close</button>
     <div class="overlay-content">
-      <img src="certificate.jpg" alt="Certificate Image">
+      <img id="certImg" src="certificate.jpg" alt="Certificate Image">
     </div>
   </div>
   
@@ -293,35 +317,27 @@
   </footer>
 
   <script>
+    let activeImageSource = 'certificate.jpg';
+
     function toggleViewer(show) {
       const overlay = document.getElementById('certOverlay');
       overlay.style.display = show ? 'block' : 'none';
       document.body.style.overflow = show ? 'hidden' : 'auto';
     }
 
-    async function downloadCertificateImage() {
-      const imageSrc = 'certificate.jpg';
-      try {
-        const response = await fetch(imageSrc);
-        if (!response.ok) throw new Error('Network response failed');
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'certificate.jpg';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-      } catch (e) {
-        // Fallback for direct link download if fetch is blocked locally
-        const a = document.createElement('a');
-        a.href = imageSrc;
-        a.download = 'certificate.jpg';
-        a.target = '_blank';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          activeImageSource = e.target.result;
+          document.getElementById('certImg').src = activeImageSource;
+          
+          const downloadBtn = document.getElementById('downloadBtn');
+          downloadBtn.href = activeImageSource;
+          downloadBtn.download = file.name;
+        };
+        reader.readAsDataURL(file);
       }
     }
   </script>
